@@ -1,0 +1,40 @@
+<html th:replace="admin/adminbase::layout(~{::section})">
+	<head>
+		
+	</head>
+	<body>
+		<section>
+			<div class="row" style="overflow: auto;">
+				<h2 style="text-align: center; color: orange;">Manage Enquiries</h2>
+					<table class="table table-bordered">
+						<thead class="table-danger">
+							<tr>
+								<th>Name</th>
+								<th>Contact No.</th>
+								<th>Email Address</th>
+								<th>Gender</th>
+								<th>Enquiry</th>
+								<th>Enquiry Date</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="e:${elist}">
+								<td th:text="${e.name}"></td>
+								<td th:text="${e.contactno}"></td>
+								<td th:text="${e.emailaddress}"></td>
+								<td th:text="${e.gender}"></td>
+								<td th:text="${e.enquirytext}"></td>
+								<td th:text="${e.posteddate}"></td>
+								<td>
+									<a th:href="@{viewenquiry/delete(id=${e.id})}">
+										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</section>
+	</body>
+</html>

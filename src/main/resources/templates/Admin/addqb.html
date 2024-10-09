@@ -1,0 +1,74 @@
+<html th:replace="admin/adminbase::layout(~{::section})">
+<head>
+		
+</head>
+<body>
+	<section>
+		<h2 style="text-align: center; color: orange;">Add Questions</h2>
+		<div th:if="${msg}">
+			<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
+		</div>
+		<form class="form-group" method="post" th:object="${dto}">
+			<table class="table table-bordered" style="width: 80%; margin: auto;">
+				<tr>
+					<td>Year</td>
+					<td>
+						<select class="form-control" th:field="${dto.year}">
+							<option value="null">--Select option--</option>
+							<option value="1st year">First Year</option>
+							<option value="2nd year">Second Year</option>
+							<option value="3rd year">Third Year</option>
+							<option value="4th year">Fourth Year</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Questions</td>
+					<td>
+						<textarea class="form-control" th:field="${dto.question}"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>A</td>
+					<td>
+						<textarea class="form-control" th:field="${dto.a}"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>B</td>
+					<td>
+						<textarea class="form-control" th:field="${dto.b}"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>C</td>
+					<td>
+						<textarea class="form-control" th:field="${dto.c}"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>D</td>
+					<td>
+						<textarea class="form-control" th:field="${dto.d}"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>Correct Option</td>
+					<td>
+						<select class="form-control" th:field="${dto.correct}">
+							<option value="null">--Select option--</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+							<option value="D">D</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="d-grid gap-2 col-2 mx-auto mt-3">
+				<button type="submit" class="btn btn-success" style="margin: auto;">Add Question</button>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

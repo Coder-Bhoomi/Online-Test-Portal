@@ -1,0 +1,61 @@
+<html th:replace="admin/adminbase::layout(~{::section})">
+	<head>
+		
+	</head>
+	<body>
+		<section>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+			<script>
+			    $(document).ready(function()
+				{
+			    	$("#searchInput").on("keyup", function() 
+					{
+			    		var value = $(this).val().toLowerCase();
+			    		$("#myTable tr").filter(function() 
+						{
+			    			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+			    		});
+			    	});
+				});
+			</script>
+							
+			<div class="row" style="overflow: auto;">
+				<h2 style="text-align: center; color: orange;">Manage Question Bank</h2>
+				<div th:if="${msg}">
+					<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
+				</div>
+				<input type="text" id="searchInput" class="form-control" placeholder="Enter any word to search"/><br/><br/>
+					<table class="table table-bordered">
+						<thead class="table-danger">
+							<tr>
+								<th>Question</th>
+								<th>Option A</th>
+								<th>Option B</th>
+								<th>Option C</th>
+								<th>Option D</th>
+								<th>Correct Answer</th>
+								<th>Year</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody id="myTable">
+							<tr th:each="q:${qblist}">
+								<td th:text="${q.question}"></td>
+								<td th:text="${q.a}"></td>
+								<td th:text="${q.b}"></td>
+								<td th:text="${q.c}"></td>
+								<td th:text="${q.d}"></td>
+								<td th:text="${q.correct}"></td>
+								<td th:text="${q.year}"></td>
+								<td>
+									<a th:href="@{viewqb/delete(id=${q.id})}">
+										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</section>
+	</body>
+</html>

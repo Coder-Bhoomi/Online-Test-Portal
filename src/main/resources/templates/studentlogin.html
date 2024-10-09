@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" th:replace="base::layout(~{::section})">
+
+<head>
+</head>
+
+<body>
+	<section>
+		<h2 style="color: #ef662f; font-weight: 600;" class="text-center"><br>Student Login</h2>
+
+		<div th:if="${message}">
+			<p th:text="${message}" class="alert alert-success alert-dismissible"></p>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5" style="display: grid; place-items: center;">
+				<img src="images/quiz.png" height="520px" class="pw img-fluid">
+			</div>
+
+			<div class="col-md-7 d-flex align-items-center">
+				<div class="transparent-form mx-auto" style="width: 75%;">
+					<form class="form-group" th:object="${dto}" method="post">
+						<table class="table table-bordered" style="margin: auto;">
+							<tr>
+								<td>Enter Email Address</td>
+								<td>
+									<input type="email" th:field="${dto.emailaddress}" class="form-control" required />
+								</td>
+							</tr>
+							<tr>
+								<td>Enter Password</td>
+								<td>
+									<input type="password" th:field="${dto.password}" class="form-control" required />
+								</td>
+							</tr>
+						</table>
+						<div class="d-grid gap-2 col-2 mx-auto mt-3">
+							<button class="btn btn-primary" type="submit"
+								style="background-color: #ef662f; border-color: #ef662f;">Login</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

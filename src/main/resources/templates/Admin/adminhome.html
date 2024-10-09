@@ -1,0 +1,23 @@
+<html th:replace="admin/adminbase::layout(~{::section})">
+
+<head>
+
+</head>
+
+<body>
+	<section>
+
+		<div class="row">
+			<div class="col-sm-4 p-3">
+				<div class="card text-center">
+					<h2 style="color: orangered;">Total Registered Student</h2>
+					<h4 th:text="${stdcount}" style="color: black;"></h4>
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4"></div>
+		</div>
+	</section>
+</body>
+
+</html>

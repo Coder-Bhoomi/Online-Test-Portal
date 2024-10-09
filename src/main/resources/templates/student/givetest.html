@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html th:replace="student/studentbase::layout(~{::section})">
+
+<head>
+	<style>
+		.container-custom {
+			background-color: #f8f9fa;
+			padding: 20px;
+			border-radius: 8px;
+			margin-top: 20px;
+		}
+
+		.instructions-list {
+			margin-bottom: 20px;
+		}
+
+		.checkbox-text {
+			font-size: 14px;
+		}
+
+		.start-btn {
+			background-color: #ff7f50;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+		}
+
+		.start-btn:hover {
+			background-color: #ff6347;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<div class="container container-custom shadow-lg">
+			<h4 class="text-danger p-3">Important Instructions</h4>
+			<p style="color: black;">Kindly go through the below mentioned set of instructions before giving the online test:</p>
+			<ul class="instructions-list">
+				<li>All questions are compulsory.</li>
+				<li>This test is timer based, so manage your time efficiently and answer questions quickly.</li>
+				<li>There is no negative marking, but avoid random guessing.</li>
+				<li>Do not open other tabs or windows, as doing so will automatically submit your test.</li>
+				<li>Read each question carefully before answering.</li>
+				<li>The questions are based on your syllabus.</li>
+				<li>Ensure a stable internet connection throughout the test.</li>
+				<li>Have a backup power source in case of power outages.</li>
+				<li>Keep your student ID and login credentials ready before the test begins.</li>
+				<li>Make sure your device is fully charged or plugged in.</li>
+				<li>Have a pen and paper ready for rough work if needed.</li>
+				<li>Log in to the test platform at least 10 minutes before the start time.</li>
+				<li>Familiarize yourself with the test interface beforehand.</li>
+				<li>If you encounter technical issues, immediately notify the test proctor or technical support.</li>
+				<li>Avoid distractions and ensure you are in a quiet environment.</li>
+				<li>Use a comfortable and ergonomic setup to maintain focus during the test.</li>
+			</ul>
+
+			<div class="form-check mb-3">
+				<input class="form-check-input" type="checkbox" id="instructionCheck">
+				<label class="form-check-label checkbox-text" for="instructionCheck">
+					I hereby declare that I have read all the important instructions mentioned above before giving the
+					Online Internship Test.
+				</label>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 mt-3">
+					<a href="starttest" class="btn px-5" style="background-color: orangered;">Start </a>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

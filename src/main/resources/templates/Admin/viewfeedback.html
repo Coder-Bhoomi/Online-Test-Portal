@@ -1,0 +1,42 @@
+<html th:replace="admin/adminbase::layout(~{::section})">
+	<head>
+		
+	</head>
+	<body>
+		<section>
+			<div class="row" style="overflow: auto;">
+				<h2 style="text-align: center; color: orange;">Manage Feedback</h2>
+					<table class="table table-bordered">
+						<thead class="table-danger">
+							<tr>
+								<th>Name</th>
+								<th>Enrollment No.</th>
+								<th>Contact No.</th>
+								<th>Email Address</th>
+								<th>Feedback Subject</th>
+								<th>Feedback Message</th>
+								<th>Feedback Date</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="f:${flist}">
+								<td th:text="${f.name}"></td>
+								<td th:text="${f.resid}"></td>
+								<td th:text="${f.contactno}"></td>
+								<td th:text="${f.emailaddress}"></td>
+								<td th:text="${f.responsesubject}"></td>
+								<td th:text="${f.responsetext}"></td>
+								<td th:text="${f.responsedate}"></td>
+								<td>
+									<a href="@{viewfeedback/delete(id=${f.resid})}">
+										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</section>
+	</body>
+</html>

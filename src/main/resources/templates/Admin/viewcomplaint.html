@@ -1,0 +1,42 @@
+<html th:replace="admin/adminbase::layout(~{::section})">
+	<head>
+		
+	</head>
+	<body>
+		<section>
+			<div class="row" style="overflow: auto;">
+				<h2 style="text-align: center; color: orange;">Manage Complaint</h2>
+					<table class="table table-bordered">
+						<thead class="table-danger">
+							<tr>
+								<th>Name</th>
+								<th>Enrollment No.</th>
+								<th>Contact No.</th>
+								<th>Email Address</th>
+								<th>Complaint Subject</th>
+								<th>Complaint Message</th>
+								<th>Complaint Date</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="c:${clist}">
+								<td th:text="${c.name}"></td>
+								<td th:text="${c.resid}"></td>
+								<td th:text="${c.contactno}"></td>
+								<td th:text="${c.emailaddress}"></td>
+								<td th:text="${c.responsesubject}"></td>
+								<td th:text="${c.responsetext}"></td>
+								<td th:text="${c.responsedate}"></td>
+								<td>
+									<a href="@{viewcomplaint/delete(id=${c.resid})}">
+										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</section>
+	</body>
+</html>
