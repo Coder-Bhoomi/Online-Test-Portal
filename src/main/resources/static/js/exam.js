@@ -1,5 +1,5 @@
-var jsonData; // Variable to store JSON data
-var currentIndex = 0; // Index to keep track of current record
+var jsonData; 
+var currentIndex = 0; 
 var qno = 1;
 var seconds = 30;
 var a;
@@ -9,7 +9,7 @@ var d;
 var item;
 var score = 0;
 var total = 0;
-// Function to display current record
+
 function checkAnswer() {
 	if (a.checked == true && item.correct == "A") {
 		score++;
@@ -50,7 +50,6 @@ function displayCurrentRecord() {
 
 }
 
-// Event listener for button click
 $(document).ready(function() {
 	jsonData = $("#jsonData").val();
 	jsonData = JSON.parse(jsonData);
@@ -74,7 +73,7 @@ $(document).ready(function() {
 			if (currentIndex == jsonData.length - 1) {
 				clearInterval(timer);
 				total = jsonData.length;
-				window.location.href = 'testover?t=' + total + '&s=' + score;
+				window.location.href = '/student/testover?t=' + total + '&s=' + score;
 			}
 			displayCurrentRecord();
 			clearInterval(timer); // Clear existing timer
@@ -84,22 +83,19 @@ $(document).ready(function() {
 		}
 	}
 
-
-
 	$('#ButtonNext').on('click', function() {
 		// Move to next record
 
 		checkAnswer();
 		currentIndex++;
-		qno++;
-		// Check bounds
-
-		if (currentIndex == jsonData.length - 1) {
-			clearInterval(timer);
+		
+		if (currentIndex == jsonData.length) {
 			total = jsonData.length;
-			window.location.href = 'TestOver?t=' + total + '&s=' + score;
+			window.location.href = '/student/testover?t=' + total + '&s=' + score;
 		}
-		// Display current record
+		
+        qno++;
+
 		displayCurrentRecord();
 		clearInterval(timer); // Clear existing timer
 		seconds = 30; // Reset seconds
@@ -108,5 +104,3 @@ $(document).ready(function() {
 	});
 	startTimer();
 });
-
-

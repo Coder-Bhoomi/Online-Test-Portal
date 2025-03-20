@@ -7,7 +7,6 @@ public class StudentInfoDto
 
 	private int rollno;
 	private String name;
-	private String enrollmentno;
 	private String emailaddress;
 	private String contactno;
 	private String whatsappno;
@@ -34,12 +33,6 @@ public class StudentInfoDto
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getEnrollmentno() {
-		return enrollmentno;
-	}
-	public void setEnrollmentno(String enrollmentno) {
-		this.enrollmentno = enrollmentno;
 	}
 	public String getEmailaddress() {
 		return emailaddress;

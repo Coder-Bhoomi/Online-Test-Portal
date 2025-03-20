@@ -4,7 +4,7 @@
 </head>
 <body>
 	<section>
-		<h2 style="text-align: center; color: orange;">Add Questions</h2>
+		<h2 style="text-align: center; color: orangered;">Add Questions</h2>
 		<div th:if="${msg}">
 			<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
 		</div>
@@ -13,7 +13,7 @@
 				<tr>
 					<td>Year</td>
 					<td>
-						<select class="form-control" th:field="${dto.year}">
+						<select class="form-control" th:field="${dto.year}" required>
 							<option value="null">--Select option--</option>
 							<option value="1st year">First Year</option>
 							<option value="2nd year">Second Year</option>
@@ -25,37 +25,37 @@
 				<tr>
 					<td>Questions</td>
 					<td>
-						<textarea class="form-control" th:field="${dto.question}"></textarea>
+						<textarea class="form-control" required th:field="${dto.question}"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>A</td>
 					<td>
-						<textarea class="form-control" th:field="${dto.a}"></textarea>
+						<textarea class="form-control" required th:field="${dto.a}"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>B</td>
 					<td>
-						<textarea class="form-control" th:field="${dto.b}"></textarea>
+						<textarea class="form-control" required th:field="${dto.b}"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>C</td>
 					<td>
-						<textarea class="form-control" th:field="${dto.c}"></textarea>
+						<textarea class="form-control" required th:field="${dto.c}"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>D</td>
 					<td>
-						<textarea class="form-control" th:field="${dto.d}"></textarea>
+						<textarea class="form-control" required th:field="${dto.d}"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>Correct Option</td>
 					<td>
-						<select class="form-control" th:field="${dto.correct}">
+						<select class="form-control" required th:field="${dto.correct}">
 							<option value="null">--Select option--</option>
 							<option value="A">A</option>
 							<option value="B">B</option>

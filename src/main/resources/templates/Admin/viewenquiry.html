@@ -5,7 +5,7 @@
 	<body>
 		<section>
 			<div class="row" style="overflow: auto;">
-				<h2 style="text-align: center; color: orange;">Manage Enquiries</h2>
+				<h2 style="text-align: center; color: orangered;">View Enquiries</h2>
 					<table class="table table-bordered">
 						<thead class="table-danger">
 							<tr>
@@ -28,7 +28,8 @@
 								<td th:text="${e.posteddate}"></td>
 								<td>
 									<a th:href="@{viewenquiry/delete(id=${e.id})}">
-										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
+										<button type="button" class="btn btn-danger" 
+										onclick="return confirm('Are you sure want to delete?')">Delete</button>
 									</a>
 								</td>
 							</tr>

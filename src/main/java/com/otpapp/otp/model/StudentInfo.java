@@ -15,9 +15,6 @@ public class StudentInfo
 	@Column(length=50, nullable=false)
 	private String name;
 	
-	@Column(length=50, nullable=false)
-	private String enrollmentno;
-	
 	@Id
 	@Column(length=100, nullable=false)
 	private String emailaddress;
@@ -86,14 +83,6 @@ public class StudentInfo
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getEnrollmentno() {
-		return enrollmentno;
-	}
-
-	public void setEnrollmentno(String enrollmentno) {
-		this.enrollmentno = enrollmentno;
 	}
 
 	public String getEmailaddress() {

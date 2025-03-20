@@ -6,16 +6,48 @@
 
 <body>
 	<section>
-
 		<div class="row">
-			<div class="col-sm-4 p-3">
-				<div class="card text-center">
-					<h2 style="color: orangered;">Total Registered Student</h2>
-					<h4 th:text="${stdcount}" style="color: black;"></h4>
+			<div class="col-md-12">
+				<h2 style="color: orangered;">Hello, Admin</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 p-5">
+				<div class="card text-center" style="background-color: #ffe4c4;">
+					<h3 style="color: orangered; margin-top: 20px;">Total Registered Student</h3>
+					<hr>
+					<h4 th:text="${stdcount}" style="color: orangered; font-weight: bolder;"></h4>
 				</div>
 			</div>
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4"></div>
+			<div class="col-sm-4 p-5">
+				<div class="card text-center" style="background-color: #ffe4c4;">
+					<h3 style="color: orangered; margin-top: 20px;">Total Enquiries</h3>
+					<hr>
+					<h4 th:text="${eqcount}" style="color: orangered; font-weight: bolder;"></h4>
+				</div>
+			</div>
+			<div class="col-sm-4 p-5">
+				<div class="card text-center" style="background-color: #ffe4c4;">
+					<h3 style="color: orangered; margin-top: 20px;">Total No. of Responses</h3>
+					<hr>
+					<h4 th:text="${rcount}" style="color: orangered; font-weight: bolder;"></h4>
+				</div>
+			</div>
+			<div class="col-sm-4 p-5">
+				<div class="card text-center" style="background-color: #ffe4c4;">
+					<h3 style="color: orangered; margin-top: 20px;">Total No. of Results</h3>
+					<hr>
+					<h4 th:text="${recount}" style="color: orangered; font-weight: bolder;"></h4>
+				</div>
+			</div>
+			<div class="col-sm-4 p-5">
+				<div class="card text-center" style="background-color: #ffe4c4;">
+					<h3 style="color: orangered; margin-top: 20px;">Total No. of Questions</h3>
+					<hr>
+					<h4 th:text="${qcount}" style="color: orangered; font-weight: bolder;"></h4>
+				</div>
+			</div>
 		</div>
 	</section>
 </body>

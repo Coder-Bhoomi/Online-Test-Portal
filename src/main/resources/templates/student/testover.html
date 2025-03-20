@@ -1,26 +1,21 @@
 <html th:replace="student/studentbase::layout(~{::section})">
-
 <head>
-
 </head>
-
 <body>
-	<section>
-		<div class="row">
-			<div class="col-sm-9 mx-auto p-5">
-				<div class="card w-100 text-center">
-					<h1 style="color: orangered; font-family: monotype corsiva; font-style: italic;">Congratulations
-					</h1>
-					<p>
-						Your Test has been Submitted Successfully. <br />
-						Your Result will be Declared soon...
-					</p>
-					<br /><br /><br />
-					<a href="shome" class="btn w-25 text-white mx-auto" style="background-color: orangered;">Go To Home</a>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section>
+        <div class="row">
+            <div class="col-sm-9 mx-auto p-5">
+                <div class="card w-100 text-center">
+                    <h1 class="mt-3" style="color: orangered; font-family: monotype corsiva; font-style: italic;">Congratulations!!</h1>
+                    <p class="mt-3">
+                        Your Test has been Submitted Successfully. <br>
+                    </p>
+                    <p>Total Questions: <span th:text="${t}"></span></p>
+                    <p>Your Score: <span th:text="${s}"></span></p>
+                    <a href="dashboard" class="btn mb-4 w-25 text-white mx-auto" style="background-color: orangered;">Go To Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
-
 </html>

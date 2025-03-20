@@ -15,32 +15,28 @@
 								class="fa-solid fa-phone"></i>&nbsp;+91 0000000000</span> or visit us at <span
 							style="color: orangered;"><i class="fa-solid fa-envelope"></i>&nbsp;nouegyanhelp@gmail.com</span></p>
 				</marquee>
+				<div th:if="${message}">
+					<p th:text="${message}" class="alert alert-success alert-dismissible"></p>
+				</div>
 			</div>
 			<!--marquee-->
 
 			<!--profile-->
-			<div class="col-sm-12 p-2">
-				<div th:if="${message}">
-					<p th:text="${message}" class="alert alert-success alert-dismissible"></p>
-				</div>
-				<div class="row">
-					<div class="col-md-6 p-3 m-4 card w-100 shadow">
+			<div class="row g-4 mb-4"> <!-- Add consistent gutter spacing -->
+				<div class="col-md-6">
+					<div class="card p-3 shadow h-100"> <!-- Ensures full height of columns match -->
+						<h3 class="text-center">Hello, <span th:text="${sinfo.name}"></span> Good Morning</h3>
+						<hr>
 						<div class="row">
-							<div class="col-sm-12 text-center">
-								<h3>Hello, <span th:text="${sinfo.name}"></span> Good Morning</h3>
-								<hr>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<div th:if="${sinfo.profilepic}" class="text-center p-2">
-									<img alt="image not found" th:src="@{'/user/'+${sinfo.profilepic}}" class="w-100">
+							<div class="col-sm-6 text-center">
+								<div th:if="${sinfo.profilepic}" class="p-2">
+									<img alt="image not found" th:src="@{'/user/'+${sinfo.profilepic}}" class="img-fluid rounded">
 								</div>
-								<div th:unless="${sinfo.profilepic}" class="text-center p-2">
-									<img alt="image2 not found" src="../images/user.jpg" class="w-100">
+								<div th:unless="${sinfo.profilepic}" class="p-2">
+									<img alt="image2 not found" src="../images/user.jpg" class="img-fluid rounded">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-sm-6">
 								<p><i class="fa-solid fa-user-tie" style="color: orangered;"></i> &nbsp;<span
 										th:text="${sinfo.name}"></span></p>
 								<p><i class="fa-solid fa-graduation-cap" style="color: orangered;"></i> &nbsp;<span
@@ -51,132 +47,135 @@
 										th:text="${sinfo.contactno}"></span></p>
 							</div>
 						</div>
-						<br />
-						<div class="row">
-							<form method="post" class="w-100" th:object="${dto}" enctype="multipart/form-data">
-								<div class="row w-100 px-5 mx-5">
-									<div class="col-md-6 text-end">
-										<input type="file" th:field="${dto.profilepic}" />
-									</div>
-									<div class="col-md-6 text-end">
-										<button type="submit" class="btn text-white ms-auto w-100"
-											style="background-color: orangered;">Upload</button>
-									</div>
+						<br>
+						<form method="post" class="w-100" th:object="${dto}" enctype="multipart/form-data">
+							<div class="row g-3 px-3">
+								<div class="col-md-6">
+									<input type="file" th:field="${dto.profilepic}" class="form-control" />
 								</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-md-5 align-items-center p-4 m-4 card shadow">
-						<div class="row">
-							<div class="col-sm-12 text-center">
-								<h3>More About Softpro</h3>
-								<hr>
+								<div class="col-md-6 text-end">
+									<button type="submit" class="btn text-white w-100"
+										style="background-color: orangered;">Upload</button>
+								</div>
 							</div>
-							<div class="card">
-								<iframe width="510" height="280"
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card p-3 shadow h-100"> <!-- Ensures full height of columns match -->
+						<div class="p-2">
+							<h3 class="text-center">More About Softpro</h3>
+							<hr>
+							<div>
+								<iframe width="100%" height="280"
 									src="https://www.youtube.com/embed/5uzBevGgugQ?si=j_HbQx2nhR69Gabq"
 									title="YouTube video player" frameborder="0"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+									referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+								</iframe>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!--profile-->
+
 			<!--left part-->
-			<div class="col-sm-6">
-				<div class="col-md-12 p-3 mr-4 card w-100 shadow text-center">
-					<h3 style="font-weight: bolder; color: orangered;">Training Mode</h3>
-					<div class="col-md-5 text-end mx-auto">
-						<button class="btn text-white ms-auto w-100"
-							style="background-color: orangered;">Offline</button>
-					</div>
-				</div>
-
-				<div class="col-md-12 p-3 mr-4 mt-4 card w-100 shadow">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 style="font-weight: bolder; color: orangered;">Offline Training Location</h3>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="col-md-12 p-3 mr-4 card w-100 shadow text-center">
+						<h3 style="font-weight: bolder; color: orangered;">Training Mode</h3>
+						<div class="col-md-5 text-end mx-auto">
+							<button class="btn text-white ms-auto w-100"
+								style="background-color: orangered;">Offline</button>
 						</div>
 					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-5">
-							<div class="text-center p-2 d-flex">
-								<img src="../images/house1.jpg" style="height: 100px; width: 70px;"
-									alt="image not found" class="w-100">
+
+					<div class="col-md-12 p-3 mr-4 mt-4 card w-100 shadow">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<h3 style="font-weight: bolder; color: orangered;">Offline Training Location</h3>
 							</div>
 						</div>
-						<div class="col-md-6 p-2">
-							<h6 class="mb-0" style="color: black; font-weight: bold;">Softpro House</h6>
-							<br>
-							<p class="mb-0">3/213, Sector J, Jankipuram, Kursi Rd, Near Gudamba Thana, Lucknow</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-5">
-							<div class="text-center p-2 d-flex">
-								<img src="../images/acdemy.jpg" style="height: 100px; width: 70px;"
-									alt="image not found" class="w-100">
+						<br>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="text-center p-2 d-flex">
+									<img src="../images/house1.jpg" style="height: 100px; width: 70px;"
+										alt="image not found" class="w-100">
+								</div>
+							</div>
+							<div class="col-md-6 p-2">
+								<h6 class="mb-0" style="color: black; font-weight: bold;">Softpro House</h6>
+								<br>
+								<p class="mb-0">3/213, Sector J, Jankipuram, Kursi Rd, Near Gudamba Thana, Lucknow</p>
 							</div>
 						</div>
-						<div class="col-md-6 p-2">
-							<h6 class="mb-0" style="color: black; font-weight: bold;">Softpro India Full Stack Academy
-							</h6>
-							<br>
-							<p class="mb-0">Pushpi Tower, Chinhat Tiraha, Vijayant Khand, Gomti Nagar, Lucknow</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-5">
-							<div class="text-center p-2 d-flex">
-								<img src="../images/its.jpg" style="height: 100px; width: 70px;" alt="image not found"
-									class="w-100">
+						<div class="row">
+							<div class="col-md-5">
+								<div class="text-center p-2 d-flex">
+									<img src="../images/acdemy.jpg" style="height: 100px; width: 70px;"
+										alt="image not found" class="w-100">
+								</div>
+							</div>
+							<div class="col-md-6 p-2">
+								<h6 class="mb-0" style="color: black; font-weight: bold;">Softpro India Full Stack Academy
+								</h6>
+								<br>
+								<p class="mb-0">Pushpi Tower, Chinhat Tiraha, Vijayant Khand, Gomti Nagar, Lucknow</p>
 							</div>
 						</div>
-						<div class="col-md-6 p-2">
-							<h6 class="mb-0" style="color: black; font-weight: bold;">Softpro Skill Development Center
-							</h6>
-							<br>
-							<p class="mb-0">I.T.S Campus, Knowledge Park III, Pari Chowk, Greater NOIDA</p>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="text-center p-2 d-flex">
+									<img src="../images/its.jpg" style="height: 100px; width: 70px;" alt="image not found"
+										class="w-100">
+								</div>
+							</div>
+							<div class="col-md-6 p-2">
+								<h6 class="mb-0" style="color: black; font-weight: bold;">Softpro Skill Development Center
+								</h6>
+								<br>
+								<p class="mb-0">I.T.S Campus, Knowledge Park III, Pari Chowk, Greater NOIDA</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="col-md-12 p-4 mr-4 mt-4 card w-100 shadow text-center">
-					<h3 style="font-weight: bolder; color: orangered;">Result</h3>
-					<p>Will be updated soon...</p>
+					<div class="col-md-12 p-4 mr-4 mb-4 mt-4 card w-100 shadow text-center">
+						<h3 style="font-weight: bolder; color: orangered;">Result</h3>
+						<p>Will be updated soon...</p>
+					</div>
 				</div>
-			</div>
-			<!--left part-->
-			<!--right part-->
-			<div class="col-md-6" style="width: 100px;">
-				<div class="card p-4 m-4 w-100 shadow">
+				<!--left part-->
 
-					<h5 style="font-weight: bolder; color: orangered;">Important Instructions</h5>
-					<hr>
-					<p style="color: black;">Kindely go through the below mentioned set of instruction before giving the
-						online test.</p>
-					<ul>
-						<li>All questions are compulsory.</li>
-						<li>This test is timer based, so manage your time efficiently and answer quickly.</li>
-						<li>There is no negative marking, but avoid random guessing.</li>
-						<li>Do not open other tabs or windows, as doing so will automatically submit your test.</li>
-						<li>Read each question carefully before answering.</li>
-						<li>The questions are based on your syllabus.</li>
-						<li>Ensure a stable internet connection throughout the test.</li>
-						<li>Have a backup power source in case of power outages.</li>
-						<li>Keep your student ID and login credentials ready before the test begins.</li>
-						<li>Make sure your device is fully charged or plugged in.</li>
-						<li>Have a pen and paper ready for rough work if needed.</li>
-						<li>Log in to the test platform at least 10 minutes before the start time.</li>
-						<li>Familiarize yourself with the test interface beforehand.</li>
-						<li>If you encounter technical issues, immediately notify the test proctor or technical
-							support.</li>
-						<li>Avoid distractions and ensure you are in a quiet environment.</li>
-						<li>Use a comfortable and ergonomic setup to maintain focus during the test.</li>
-					</ul>
+				<!--right part-->
+				<div class="col-sm-6">
+					<div class="card p-4 w-100 shadow">
+
+						<h5 style="font-weight: bolder; color: orangered;">Important Instructions</h5>
+						<hr>
+						<p style="color: black;">Kindely go through the below mentioned set of instruction before giving the
+							online test.</p>
+						<ul>
+							<li>All questions are compulsory.</li>
+							<li>This test is timer based, so manage your time efficiently and answer quickly.</li>
+							<li>There is no negative marking, but avoid random guessing.</li>
+							<li>Do not open other tabs or windows, as doing so will automatically submit your test.</li>
+							<li>Read each question carefully before answering.</li>
+							<li>The questions are based on your syllabus.</li>
+							<li>Ensure a stable internet connection throughout the test.</li>
+							<li>Have a backup power source in case of power outages.</li>
+							<li>Keep your student ID and login credentials ready before the test begins.</li>
+							<li>Make sure your device is fully charged or plugged in.</li>
+							<li>Have a pen and paper ready for rough work if needed.</li>
+							<li>Log in to the test platform at least 10 minutes before the start time.</li>
+							<li>Familiarize yourself with the test interface beforehand.</li>
+							<li>If you encounter technical issues, immediately notify the test proctor or technical
+								support.</li>
+							<li>Avoid distractions and ensure you are in a quiet environment.</li>
+							<li>Use a comfortable and ergonomic setup to maintain focus during the test.</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

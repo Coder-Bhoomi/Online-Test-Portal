@@ -5,12 +5,12 @@
 	<body>
 		<section>
 			<div class="row" style="overflow: auto;">
-				<h2 style="text-align: center; color: orange;">Manage Feedback</h2>
+				<h2 style="text-align: center; color: orangered;">View Feedback</h2>
 					<table class="table table-bordered">
 						<thead class="table-danger">
 							<tr>
 								<th>Name</th>
-								<th>Enrollment No.</th>
+								<th>Response Id</th>
 								<th>Contact No.</th>
 								<th>Email Address</th>
 								<th>Feedback Subject</th>
@@ -29,7 +29,7 @@
 								<td th:text="${f.responsetext}"></td>
 								<td th:text="${f.responsedate}"></td>
 								<td>
-									<a href="@{viewfeedback/delete(id=${f.resid})}">
+									<a th:href="@{viewfeedback/delete(resid=${f.resid})}">
 										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
 									</a>
 								</td>

@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,24 @@ public class StudentController {
 
 	@GetMapping("/shome")
 	public String showStudentHome(HttpSession session, HttpServletResponse response, Model model) {
+		try {
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			if (session.getAttribute("studentid") != null) {
+				StudentInfo sinfo = stdrepo.findById(session.getAttribute("studentid").toString()).get();
+				model.addAttribute("sinfo", sinfo);
+				StudentInfoDto dto = new StudentInfoDto();
+				model.addAttribute("dto", dto);
+				return "student/dashboard";
+			} else {
+				return "redirect:/studentlogin";
+			}
+		} catch (Exception ex) {
+			return "redirect:/studentlogin";
+		}
+	}
+
+	@GetMapping("/dashboard")
+	public String showDashboard(HttpSession session, HttpServletResponse response, Model model) {
 		try {
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			if (session.getAttribute("studentid") != null) {
@@ -199,7 +218,7 @@ public class StudentController {
 	@GetMapping("/givetest")
 	public String showGiveTest() 
 	{
-		return "student/givetest";
+		return "/student/givetest";
 	}
 	
 	@GetMapping("/starttest")
@@ -227,7 +246,7 @@ public class StudentController {
 						model.addAttribute("json", json);
 						model.addAttribute("tt", qlist.size()/2);
 						model.addAttribute("tq", qlist.size());
-						return "student/starttest";
+						return "/student/starttest";
 					}
 				}
 		 catch (Exception e) {
@@ -238,7 +257,7 @@ public class StudentController {
 				model.addAttribute("json", json);
 				model.addAttribute("tt", qlist.size()/2);
 				model.addAttribute("tq", qlist.size());
-				return "student/starttest";
+				return "/student/starttest";
 				}
 			}
 			else
@@ -253,8 +272,7 @@ public class StudentController {
 	}
 
 	@GetMapping("/testover")
-	public String testOver(HttpSession session, HttpServletResponse response, @RequestParam int s,
-			@RequestParam int t) {
+	public String testOver(HttpSession session, HttpServletResponse response, @RequestParam int s, @RequestParam int t, Model model) {
 		try {
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			if (session.getAttribute("studentid") != null) {
@@ -271,6 +289,9 @@ public class StudentController {
 				r.setGetmarks(s);
 				r.setStatus("true");
 				rrepo.save(r);
+
+				model.addAttribute("t", t);
+				model.addAttribute("s", s);
 				return "student/testover";
 			} else {
 				return "redirect:/student";
@@ -285,5 +306,32 @@ public class StudentController {
 	{
 		return "student/trainingvideo";
 	}
+
+	@GetMapping("/viewresult")
+	public String showResult(HttpSession session, HttpServletResponse response, Model model) {
+		try {
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+			String emailaddress = (String) session.getAttribute("studentid");
+
+			if (emailaddress != null) {
+				Optional<Result> resultOptional = rrepo.findById(emailaddress);
+
+				if (resultOptional.isPresent()) {
+					model.addAttribute("result", resultOptional.get());
+					return "student/viewresult"; 
+				} else {
+					model.addAttribute("error", "Result not found for the given email.");
+					return "student/viewresult"; 
+				}
+			} 
+			else {
+				return "redirect:/login"; 
+			}
+		} catch (Exception ex) {
+			return "redirect:/login"; 
+		}
+	}
+
 
 }

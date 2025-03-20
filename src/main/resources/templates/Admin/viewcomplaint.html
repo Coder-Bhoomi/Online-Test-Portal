@@ -5,7 +5,7 @@
 	<body>
 		<section>
 			<div class="row" style="overflow: auto;">
-				<h2 style="text-align: center; color: orange;">Manage Complaint</h2>
+				<h2 style="text-align: center; color: orangered;">View Complaint</h2>
 					<table class="table table-bordered">
 						<thead class="table-danger">
 							<tr>
@@ -29,8 +29,9 @@
 								<td th:text="${c.responsetext}"></td>
 								<td th:text="${c.responsedate}"></td>
 								<td>
-									<a href="@{viewcomplaint/delete(id=${c.resid})}">
-										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>
+									<a th:href="@{viewcomplaint/delete(resid=${c.resid})}">
+										<button type="button" class="btn btn-danger" 
+										onclick="return confirm('Are you sure want to delete?')">Delete</button>
 									</a>
 								</td>
 							</tr>

@@ -4,16 +4,15 @@
 	</head>
 	<body>
 		<section>
+			<div th:if="${msg}">
+				<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
+			</div>
 			<div class="row" style="overflow: auto;">
-				<h2 style="text-align: center; color: orange;">Manage Students</h2>
-				<div th:if="${msg}">
-					<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
-				</div>
+				<h2 style="text-align: center; color: orangered;">Manage Students</h2>
 					<table class="table table-bordered">
 						<thead class="table-danger">
 							<tr>
 								<th>Name</th>
-								<th>Enrollment No.</th>
 								<th>Email Address</th>
 								<th>Whatsapp No.</th>
 								<th>College/University</th>
@@ -29,7 +28,6 @@
 						<tbody>
 							<tr th:each="s:${slist}">
 								<td th:text="${s.name}"></td>
-								<td th:text="${s.enrollmentno}"></td>
 								<td th:text="${s.emailaddress}"></td>
 								<td th:text="${s.whatsappno}"></td>
 								<td th:text="${s.collegename}"></td>

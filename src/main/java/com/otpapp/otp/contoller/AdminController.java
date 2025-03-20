@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +26,6 @@ import com.otpapp.otp.service.QbRepo;
 import com.otpapp.otp.service.ResponseRepo;
 import com.otpapp.otp.service.ResultRepo;
 import com.otpapp.otp.service.StudentInfoRepo;
-
-import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -65,6 +63,18 @@ public class AdminController
 			{
 				long stdcount = strepo.count();
 				model.addAttribute("stdcount", stdcount);
+				
+				long eqcount = erepo.count();
+				model.addAttribute("eqcount", eqcount);
+
+				long rcount = resrepo.count();
+				model.addAttribute("rcount", rcount);
+
+				long qcount = qbrepo.count();
+				model.addAttribute("qcount", qcount);
+
+				long recount = rrepo.count();
+				model.addAttribute("recount", recount);
 				return "admin/adminhome";
 			}
 			else 
@@ -78,14 +88,28 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping("/adhome")
-	public String showAdminHome(HttpSession session, HttpServletResponse response)
+	@GetMapping("/adminhome")
+	public String showAdminHome(HttpSession session, HttpServletResponse response, Model model)
 	{
 		try 
 		{
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			if(session.getAttribute("adminid")!=null)
 			{
+				long stdcount = strepo.count();
+				model.addAttribute("stdcount", stdcount);
+
+				long eqcount = erepo.count();
+				model.addAttribute("eqcount", eqcount);
+
+				long rcount = resrepo.count();
+				model.addAttribute("rcount", rcount);
+
+				long qcount = qbrepo.count();
+				model.addAttribute("qcount", qcount);
+
+				long recount = rrepo.count();
+				model.addAttribute("recount", recount);
 				return "admin/adminhome";
 			}
 			else 
@@ -249,7 +273,7 @@ public class AdminController
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			if(session.getAttribute("adminid")!=null)
 			{
-				List<Response> clist = resrepo.FindResponseByResponseType("Feedback");
+				List<Response> clist = resrepo.FindResponseByResponseType("Complain");
 				model.addAttribute("clist", clist);
 				return "admin/viewcomplaint";
 			}
@@ -478,15 +502,15 @@ public class AdminController
 	}
 	
 	@GetMapping("/viewresult/delete")
-	public String deleteResult(@RequestParam String id, HttpSession session, RedirectAttributes redirectattribute)
+	public String deleteResult(@RequestParam String emailaddress, HttpSession session, RedirectAttributes redirectattribute)
 	{
 		try 
 		{
 			if(session.getAttribute("adminid")!=null)
 			{
-				Result r = rrepo.findById(id).get();
+				Result r = rrepo.findById(emailaddress).get();
 				rrepo.delete(r);
-				redirectattribute.addFlashAttribute("msg", "deleted successfully");
+				redirectattribute.addFlashAttribute("msg", "Deleted successfully");
 				return "redirect:/admin/viewresult";
 			}
 			else
@@ -494,8 +518,9 @@ public class AdminController
 				return "redirect:/adminlogin";
 			}
 		}
-		catch(Exception ex)
+		catch(Exception e)
 		{
+			redirectattribute.addFlashAttribute("msg", "Something went wrong"+ e.getMessage());
 			return "redirect:/adminlogin";
 		}
 		

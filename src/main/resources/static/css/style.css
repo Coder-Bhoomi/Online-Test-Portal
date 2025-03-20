@@ -14,10 +14,10 @@ body{
 }
 
 .container {
-    padding: 15px;
-    margin: 20px auto;
+    padding: 10px;
+    margin: 10px auto;
     background-color: #ffe4c4;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 .content{

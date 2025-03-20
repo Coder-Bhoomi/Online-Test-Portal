@@ -1,16 +1,16 @@
 <html th:replace="admin/adminbase::layout(~{::section})">
 
 <head>
-
+	
 </head>
 
 <body>
 	<section>
+		<div th:if="${msg}" id="alert-box">
+			<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
+		</div>
 		<div class="row" style="overflow: auto;">
-			<h2 style="text-align: center; color: orange;">Manage Students</h2>
-			<div th:if="${msg}">
-				<p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
-			</div>
+			<h2 style="text-align: center; color: orangered;">Manage Results</h2>
 			<table class="table table-bordered">
 				<thead class="table-danger">
 					<tr>

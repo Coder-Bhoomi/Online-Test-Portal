@@ -5,12 +5,10 @@
 	<style>
 		.form-group {
 			width: 100%;
-			/* Make the form take full width */
 		}
 
 		table {
 			width: 100%;
-			/* Ensure table inside form takes up full width */
 		}
 	</style>
 </head>
@@ -26,34 +24,27 @@
 		<!-- Row wrapper for side-by-side layout -->
 		<div class="row">
 			<!-- Image column -->
-			<div class="col-md-5" style="display: grid; place-items: center;">
+			<div class="col-md-6" style="display: grid; place-items: center;">
 				<img src="images/quiz.png" height="520px" class="pw img-fluid">
 			</div>
 
-			<!-- Form column (center vertically with d-flex) -->
-			<div class="col-md-7 d-flex align-items-center">
-				<div class="transparent-form mx-auto" style="width: 75%;">
-					<form class="form-group" th:object="${dto}" method="post">
-						<table class="table table-bordered" style="margin: auto;">
-							<tr>
-								<td>Enter UserId</td>
-								<td>
-									<input type="text" th:field="${dto.userid}" class="form-control" required />
-								</td>
-							</tr>
-							<tr>
-								<td>Enter Password</td>
-								<td>
-									<input type="password" th:field="${dto.password}" class="form-control" required />
-								</td>
-							</tr>
-						</table>
-						<div class="d-grid gap-2 col-2 mx-auto mt-3">
-							<button class="btn btn-primary" type="submit"
-								style="background-color: #ef662f; border-color: #ef662f;">Login</button>
-						</div>
-					</form>
-				</div>
+			<div class="col-md-6 mt-5">
+				<form class="form-group" th:object="${dto}" method="post">
+					<div class="col-md-6 mx-auto mt-5">
+						<label for="userid" class="form-label">UserId *</label>
+						<input type="text" th:field="${dto.userid}" class="form-control" required />
+					</div>
+					<div class="col-md-6 mx-auto mt-3">
+						<label for="password" class="form-label">Password *</label>
+						<input type="password" th:field="${dto.password}" class="form-control" required 
+						       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}" 
+						       title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number." />
+					</div>
+					<div class="d-grid gap-2 col-2 mx-auto mt-3">
+						<button class="btn btn-primary" type="submit"
+						style="background-color: #ef662f; border-color: #ef662f;">Login</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</section>

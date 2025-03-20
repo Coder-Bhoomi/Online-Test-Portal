@@ -64,7 +64,6 @@ public class MainController {
 		{
 			StudentInfo stu = new StudentInfo();
 			stu.setRollno(studentInfoDto.getRollno());
-			stu.setEnrollmentno(studentInfoDto.getEnrollmentno());
 			stu.setName(studentInfoDto.getName());
 			stu.setContactno(studentInfoDto.getContactno());
 			stu.setWhatsappno(studentInfoDto.getWhatsappno());
