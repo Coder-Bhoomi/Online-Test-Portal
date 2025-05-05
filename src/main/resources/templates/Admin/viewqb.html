@@ -34,7 +34,7 @@
 								<th>Option C</th>
 								<th>Option D</th>
 								<th>Correct Answer</th>
-								<th>Year</th>
+								<th>Course</th>
 								<th>Delete</th>
 							</tr>
 						</thead>
@@ -46,7 +46,7 @@
 								<td th:text="${q.c}"></td>
 								<td th:text="${q.d}"></td>
 								<td th:text="${q.correct}"></td>
-								<td th:text="${q.year}"></td>
+								<td th:text="${q.course}"></td>
 								<td>
 									<a th:href="@{viewqb/delete(id=${q.id})}">
 										<button type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button>

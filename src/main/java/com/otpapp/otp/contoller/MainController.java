@@ -63,21 +63,11 @@ public class MainController {
 		try 
 		{
 			StudentInfo stu = new StudentInfo();
-			stu.setRollno(studentInfoDto.getRollno());
 			stu.setName(studentInfoDto.getName());
 			stu.setContactno(studentInfoDto.getContactno());
-			stu.setWhatsappno(studentInfoDto.getWhatsappno());
 			stu.setEmailaddress(studentInfoDto.getEmailaddress());
 			stu.setPassword(studentInfoDto.getPassword());
-			stu.setCollegename(studentInfoDto.getCollegename());
 			stu.setCourse(studentInfoDto.getCourse());
-			stu.setBranch(studentInfoDto.getBranch());
-			stu.setYear(studentInfoDto.getYear());
-			stu.setHighschool(studentInfoDto.getHighschool());
-			stu.setInterschool(studentInfoDto.getInterschool());
-			stu.setAggregate(studentInfoDto.getAggregate());
-			stu.setTrainingmode(studentInfoDto.getTrainingmode());
-			stu.setTraininglocation(studentInfoDto.getTraininglocation());
 			stu.setRegdate(new Date()+"");
 			srepo.save(stu);
 			redirectAttribute.addFlashAttribute("message", "Registration Successfully");

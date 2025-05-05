@@ -14,13 +14,8 @@
 							<tr>
 								<th>Name</th>
 								<th>Email Address</th>
-								<th>Whatsapp No.</th>
-								<th>College/University</th>
+								<th>Contact No.</th>
 								<th>Course</th>
-								<th>Branch</th>
-								<th>Year</th>
-								<th>Training Mode</th>
-								<th>Training Location</th>
 								<th>Registration Date</th>
 								<th>Delete</th>
 							</tr>
@@ -29,13 +24,8 @@
 							<tr th:each="s:${slist}">
 								<td th:text="${s.name}"></td>
 								<td th:text="${s.emailaddress}"></td>
-								<td th:text="${s.whatsappno}"></td>
-								<td th:text="${s.collegename}"></td>
+								<td th:text="${s.contactno}"></td>
 								<td th:text="${s.course}"></td>
-								<td th:text="${s.branch}"></td>
-								<td th:text="${s.year}"></td>
-								<td th:text="${s.trainingmode}"></td>
-								<td th:text="${s.traininglocation}"></td>
 								<td th:text="${s.regdate}"></td>
 								<td>
 									<a th:href="@{viewstudent/delete(email=${s.emailaddress})}">

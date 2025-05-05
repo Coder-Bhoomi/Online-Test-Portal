@@ -410,7 +410,7 @@ public class AdminController
 			if(session.getAttribute("adminid")!=null)
 			{
 				Qb qb = new Qb();
-				qb.setYear(dto.getYear());
+				qb.setCourse(dto.getCourse());
 				qb.setQuestion(dto.getQuestion());
 				qb.setA(dto.getA());
 				qb.setB(dto.getB());

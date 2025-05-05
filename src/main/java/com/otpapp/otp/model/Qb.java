@@ -16,7 +16,7 @@ public class Qb
 	private int id;
 	
 	@Column(length=100, nullable=false)
-	private String year;
+	private String course;
 	
 	@Column(length=2000, nullable=false)
 	private String question;
@@ -33,7 +33,7 @@ public class Qb
 	@Column(length=2000, nullable=false)
 	private String d;
 	
-	@Column(length=5, nullable=false)
+	@Column(length=500, nullable=false)
 	private String correct;
 
 	public int getId() {
@@ -44,12 +44,12 @@ public class Qb
 		this.id = id;
 	}
 
-	public String getYear() {
-		return year;
+	public String getCourse() {
+		return course;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setCourse(String course) {
+		this.course = course;
 	}
 
 	public String getQuestion() {

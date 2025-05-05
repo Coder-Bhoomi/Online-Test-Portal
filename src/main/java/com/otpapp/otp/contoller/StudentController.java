@@ -5,22 +5,28 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.Principal;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otpapp.otp.dto.ResponseDto;
 import com.otpapp.otp.dto.StudentInfoDto;
 import com.otpapp.otp.model.Qb;
@@ -220,8 +226,10 @@ public class StudentController {
 	{
 		return "/student/givetest";
 	}
+
 	
-	@GetMapping("/starttest")
+	
+	/*@GetMapping("/starttest")
 	public String showStartTest(HttpSession session, HttpServletResponse response, Model model,RedirectAttributes attrib)
 	{
 		try {
@@ -250,7 +258,7 @@ public class StudentController {
 					}
 				}
 		 catch (Exception e) {
-			 String year = sinfo.getYear();
+			 	String year = sinfo.getYear();
 				List<Qb> qlist = qbrepo.findQbByYear(year);
 				Gson gson = new Gson();
 				String json=gson.toJson(qlist);
@@ -269,7 +277,31 @@ public class StudentController {
 			
 			return "redirect:/studentlogin";
 		}
-	}
+	}*/
+
+	@GetMapping("/student/starttest")
+    public String giveTest(Model model, Principal principal) {
+        String studentEmail = principal.getName();
+        StudentInfo student = stdrepo.findById(studentEmail).orElse(null);
+        String course = student.getCourse();
+
+		Pageable pageable = PageRequest.of(0, 10); // Adjust the page size as needed
+		List<Qb> allQuestions = qbrepo.findByCourse(course, pageable).getContent();
+        Collections.shuffle(allQuestions);
+        List<Qb> selectedQuestions = allQuestions.stream().limit(10).toList();
+
+		String jsonData;
+		try {
+			jsonData = new ObjectMapper().writeValueAsString(selectedQuestions);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException("Error converting questions to JSON", e);
+		}
+
+        model.addAttribute("json", jsonData);
+        model.addAttribute("tt", "10 minutes");
+        model.addAttribute("tq", 10);
+        return "student/starttest"; // your Thymeleaf page
+    }
 
 	@GetMapping("/testover")
 	public String testOver(HttpSession session, HttpServletResponse response, @RequestParam int s, @RequestParam int t, Model model) {
@@ -280,10 +312,7 @@ public class StudentController {
 				Result r = new Result();
 				r.setEmailaddress(st.getEmailaddress());
 				r.setName(st.getName());
-				r.setCollegename(st.getCollegename());
 				r.setCourse(st.getCourse());
-				r.setBranch(st.getBranch());
-				r.setYear(st.getYear());
 				r.setContactno(st.getContactno());
 				r.setTotalmarks(t);
 				r.setGetmarks(s);

@@ -43,6 +43,8 @@
 						<label for="name" class="form-label">Name *</label>
 						<input type="text" id="name" class="form-control" th:field="${dto.name}" placeholder="Enter Your Name" required />
 					</div>
+				</div>
+				<div class="form-row row mb-3">
 					<div class="col-md-6">
 						<label for="emailaddress" class="form-label">Email Address *</label>
 						<input type="email" id="emailaddress" class="form-control" th:field="${dto.emailaddress}" placeholder="Enter Your Email" required />
@@ -55,21 +57,12 @@
 						<input type="text" id="contactno" class="form-control" th:field="${dto.contactno}" placeholder="Enter Your Mobile Number" required />
 						<span id="contactError" class="error"></span>
 					</div>
-					<div class="col-md-6">
-						<label for="whatsappno" class="form-label">WhatsApp Number *</label>
-						<input type="text" id="whatsappno" class="form-control" th:field="${dto.whatsappno}" placeholder="Enter Your WhatsApp Number" required />
-						<span id="whatsappError" class="error"></span>
-					</div>
 				</div>
 				<div class="form-row row mb-3">
 					<div class="col-md-6">
 						<label for="password" class="form-label">Password *</label>
 						<input type="password" id="password" class="form-control" th:field="${dto.password}" placeholder="Enter Your Password" required />
 						<span id="passwordError" class="error"></span>
-					</div>
-					<div class="col-md-6">
-						<label for="collegename" class="form-label">College Name *</label>
-						<input type="text" id="collegename" class="form-control" th:field="${dto.collegename}" placeholder="Enter College Name" required />
 					</div>
 				</div>
 				<div class="form-row row mb-3">
@@ -83,60 +76,9 @@
 							<option value="bsc">B.Sc.</option>
 						</select>
 					</div>
-					<div class="col-md-6">
-						<label for="branch" class="form-label">Branch *</label>
-						<select id="branch" class="form-select" th:field="${dto.branch}" required>
-							<option value="null">--Select option--</option>
-							<option value="cs">CS</option>
-							<option value="it">IT</option>
-							<option value="ai">AI</option>
-						</select>
-					</div>
 				</div>
-				<div class="form-row row mb-3">
-					<div class="col-md-6">
-						<label for="year" class="form-label">Year *</label>
-						<select id="year" class="form-select" th:field="${dto.year}" required>
-							<option value="null">--Select option--</option>
-							<option value="1st year">1st year</option>
-							<option value="2nd year">2nd year</option>
-							<option value="3rd year">3rd year</option>
-						</select>
-					</div>
-					<div class="col-md-6">
-						<label for="highschool" class="form-label">High School Marks(%) *</label>
-						<input type="number" id="highschool" class="form-control" th:field="${dto.highschool}" placeholder="Enter High School Marks" required />
-					</div>
-				</div>
-				<div class="form-row row mb-3">
-					<div class="col-md-6">
-						<label for="interschool" class="form-label">Intermediate Marks(%) *</label>
-						<input type="number" id="interschool" class="form-control" th:field="${dto.interschool}" placeholder="Enter Intermediate Marks" required />
-					</div>
-					<div class="col-md-6">
-						<label for="aggregate" class="form-label">Aggregate Marks(%) *</label>
-						<input type="number" id="aggregate" class="form-control" th:field="${dto.aggregate}" placeholder="Enter Aggregate Marks" required />
-					</div>
-				</div>
-				<div class="form-row row mb-3">
-					<div class="col-md-6">
-						<label for="trainingmode" class="form-label">Training Mode *</label>
-						<select id="trainingmode" class="form-select" th:field="${dto.trainingmode}" required>
-							<option value="null">--Select option--</option>
-							<option value="online">Online</option>
-							<option value="offline">Offline</option>
-						</select>
-					</div>
-					<div class="col-md-6">
-						<label for="traininglocation" class="form-label">Training Location *</label>
-						<select id="traininglocation" class="form-select" th:field="${dto.traininglocation}" required>
-							<option value="null">--Select option--</option>
-							<option value="Jankipuram">Sector J, Jankipuram, Lucknow</option>
-							<option value="Chinhat">Chinhat Tiraha, Lucknow</option>
-							<option value="Noida">I.T.S Campus, Greater NOIDA</option>
-						</select>
-					</div>
-				</div>
+				
+				
 				<div class="d-grid gap-2 col-2 mx-auto mt-5">
 					<button class="btn btn-primary" type="submit" style="background-color: #ef662f;  border-color: #ef662f;">Submit</button>
 				</div>

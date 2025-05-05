@@ -2,19 +2,14 @@ package com.otpapp.otp.dto;
 
 public class QbDto 
 {
-	private String year;
 	private String question;
 	private String a;
 	private String b;
 	private String c;
 	private String d;
 	private String correct;
-	public String getYear() {
-		return year;
-	}
-	public void setYear(String year) {
-		this.year = year;
-	}
+	private String course;
+
 	public String getQuestion() {
 		return question;
 	}
@@ -51,7 +46,12 @@ public class QbDto
 	public void setCorrect(String correct) {
 		this.correct = correct;
 	}
-	
+	public String getCourse() {
+		return course;
+	}
+	public void setCourse(String course) {
+		this.course = course;
+	}
 	
 
 }
