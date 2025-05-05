@@ -1,6 +1,6 @@
 <html th:replace="student/studentbase::layout(~{::section})">
 <head>
-    <title>Student Result</title>
+    <title>Student Results</title>
 </head>
 <body>
     <section>
@@ -8,53 +8,35 @@
             <p th:text="${msg}" class="alert alert-success alert-dismissible"></p>
         </div>
         <div class="row" style="overflow: auto;">
-            <h2 style="text-align: center; color: orangered;">Result</h2>
-            <table class="table table-bordered">
-                <thead class="table-danger">
-                    <tr>
-                        <th>Field</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Name</td>
-                        <td th:text="${result.name}"></td>
-                    </tr>
-                    <tr>
-                        <td>Email Address</td>
-                        <td th:text="${result.emailaddress}"></td>
-                    </tr>
-                    <tr>
-                        <td>Contact No.</td>
-                        <td th:text="${result.contactno}"></td>
-                    </tr>
-                    <tr>
-                        <td>College/University</td>
-                        <td th:text="${result.collegename}"></td>
-                    </tr>
-                    <tr>
-                        <td>Course</td>
-                        <td th:text="${result.course}"></td>
-                    </tr>
-                    <tr>
-                        <td>Branch</td>
-                        <td th:text="${result.branch}"></td>
-                    </tr>
-                    <tr>
-                        <td>Year</td>
-                        <td th:text="${result.year}"></td>
-                    </tr>
-                    <tr>
-                        <td>Total Marks</td>
-                        <td th:text="${result.totalmarks}"></td>
-                    </tr>
-                    <tr>
-                        <td>Obtained Marks</td>
-                        <td th:text="${result.getmarks}"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2 style="text-align: center; color: orangered;">Results</h2>
+            <div th:if="${results}">
+                <table class="table table-bordered">
+                    <thead class="table-danger">
+                        <tr>
+                            <th>Test Number</th>
+                            <th>Name</th>
+                            <th>Email Address</th>
+                            <th>Contact No.</th>
+                            <th>Course</th>
+                            <th>Total Marks</th>
+                            <th>Obtained Marks</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="result : ${results}">
+                            <td th:text="${result.testNumber}"></td>
+                            <td th:text="${result.name}"></td>
+                            <td th:text="${result.emailaddress}"></td>
+                            <td th:text="${result.contactno}"></td>
+                            <td th:text="${result.course}"></td>
+                            <td th:text="${result.totalmarks}"></td>
+                            <td th:text="${result.getmarks}"></td>
+                            <td th:text="${result.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div th:if="${error}" style="color: red; text-align: center;">
                 <p th:text="${error}"></p>
             </div>

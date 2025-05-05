@@ -16,14 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.otpapp.otp.dto.ResponseDto;
 import com.otpapp.otp.dto.StudentInfoDto;
@@ -183,6 +182,8 @@ public class StudentController {
                 return "redirect:/studentlogin";
             }
         } catch (Exception e) {
+            System.out.println("ERROR in testOver: " + e.getMessage());
+            e.printStackTrace();
             return "redirect:/studentlogin";
         }
     }
@@ -223,80 +224,41 @@ public class StudentController {
         return "/student/givetest";
     }
 
-    @GetMapping("/student/strattest/{testNumber}")
-    public String showStartTest(@RequestParam("testNumber") int testNumber, HttpSession session, HttpServletResponse response, Model model, RedirectAttributes attrib) {
-        try {
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            if (session.getAttribute("studentid") != null) {
-                StudentInfo sinfo = stdrepo.findById(session.getAttribute("studentid").toString()).get();
-                model.addAttribute("sinfo", sinfo);
-                String status = rrepo.getStatus(sinfo.getEmailaddress());
-                try {
-                    if (status.equals("true")) {
-                        attrib.addFlashAttribute("message", "You have already given the test.");
-                        return "redirect:/student/givetest";
-                    } else {
-                        String course = sinfo.getCourse();
-                        List<Qb> qlist = qbrepo.findQbByCourse(course);
-						int offset = (testNumber - 1) * 10;
-        				Pageable pageable = PageRequest.of(offset / 10, 10);
-
-        				Page<Qb> questionsPage = qbrepo.findByCourse(course, pageable);
-        				List<Qb> questions = questionsPage.getContent();
-                        Gson gson = new Gson();
-                        String json = gson.toJson(qlist);
-                        model.addAttribute("json", json);
-                        model.addAttribute("tt", qlist.size() / 2);
-                        model.addAttribute("tq", qlist.size());
-                        return "/student/starttest";
-                    }
-                } catch (Exception e) {
-                    String course = sinfo.getCourse();
-                    List<Qb> qlist = qbrepo.findQbByCourse(course);
-                    Gson gson = new Gson();
-                    String json = gson.toJson(qlist);
-                    model.addAttribute("json", json);
-                    model.addAttribute("tt", qlist.size() / 2);
-                    model.addAttribute("tq", qlist.size());
-                    return "/student/starttest";
-                }
-            } else {
-                return "redirect:/studentlogin";
-            }
-        } catch (Exception ex) {
-
+    @GetMapping("/starttest/{testNumber}")
+    public String startTestByTestNumber(@PathVariable("testNumber") int testNumber, Model model, HttpSession session) {
+        String studentid = (String) session.getAttribute("studentid");
+        System.out.println("DEBUG: studentid in session: " + studentid);
+        if (studentid == null) {
+            System.out.println("DEBUG: studentid is null, redirecting to login");
             return "redirect:/studentlogin";
         }
-    }
-
-    /*@GetMapping("/starttest")
-    public String startTest(@RequestParam("testNumber") int testNumber, HttpSession session, Model model) throws JsonProcessingException {
-        String email = (String) session.getAttribute("email");
-
-        StudentInfo student = stdrepo.findById(email).orElse(null);
+        StudentInfo student = stdrepo.findById(studentid).orElse(null);
         if (student == null) {
-            return "redirect:/login";
+            System.out.println("DEBUG: student not found for id: " + studentid + ", redirecting to login");
+            return "redirect:/studentlogin";
         }
-
         String course = student.getCourse();
-        int offset = (testNumber - 1) * 10;
-        Pageable pageable = PageRequest.of(offset / 10, 10);
 
-        Page<Qb> questionsPage = qbrepo.findByCourse(course, pageable);
-        List<Qb> questions = questionsPage.getContent();
+        int pageIndex = testNumber - 1; // zero-based page index
+        int pageSize = 10;
 
-        // Convert List<Qb> to JSON
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(questions);
+        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        Page<Qb> questionPage = qbrepo.findByCourse(course, pageable);
+        List<Qb> questions = questionPage.getContent();
+
+        // Convert questions to JSON string
+        Gson gson = new Gson();
+        String json = gson.toJson(questions);
 
         model.addAttribute("json", json);
-        model.addAttribute("tt", 10); // total time, in minutes maybe
-        model.addAttribute("tq", questions.size()); // total questions
+        model.addAttribute("tq", questions.size());
+        model.addAttribute("tt", questions.size() * 30); // total time in seconds (30 sec per question)
 
         return "student/starttest";
-    }*/
+    }
+
     @GetMapping("/testover")
-    public String testOver(HttpSession session, HttpServletResponse response, @RequestParam int s, @RequestParam int t, Model model) {
+    public String testOver(HttpSession session, HttpServletResponse response, @RequestParam int s, @RequestParam int t, Model model, RedirectAttributes redirect) {
         try {
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             if (session.getAttribute("studentid") != null) {
@@ -315,10 +277,11 @@ public class StudentController {
                 model.addAttribute("s", s);
                 return "student/testover";
             } else {
-                return "redirect:/student";
+                return "redirect:/studentlogin";
             }
         } catch (Exception e) {
-            return "redirect:/student";
+            redirect.addFlashAttribute("message", "Something went wrong" + e.getMessage());
+            return "redirect:/studentlogin";
         }
     }
 
@@ -335,20 +298,20 @@ public class StudentController {
             String emailaddress = (String) session.getAttribute("studentid");
 
             if (emailaddress != null) {
-                Optional<Result> resultOptional = rrepo.findById(emailaddress);
+                List<Result> results = rrepo.findByEmailaddress(emailaddress);
 
-                if (resultOptional.isPresent()) {
-                    model.addAttribute("result", resultOptional.get());
+                if (!results.isEmpty()) {
+                    model.addAttribute("results", results);
                     return "student/viewresult";
                 } else {
-                    model.addAttribute("error", "Result not found for the given email.");
+                    model.addAttribute("error", "Results not found for the given email.");
                     return "student/viewresult";
                 }
             } else {
-                return "redirect:/login";
+                return "redirect:/studentlogin";
             }
         } catch (Exception ex) {
-            return "redirect:/login";
+            return "redirect:/studentlogin";
         }
     }
 

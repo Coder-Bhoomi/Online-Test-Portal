@@ -71,10 +71,11 @@ $(document).ready(function() {
 			currentIndex++;
 			qno++;
 			if (currentIndex == jsonData.length - 1) {
-				clearInterval(timer);
+				checkAnswer(); // check last answer
 				total = jsonData.length;
-				window.location.href = '/student/testover?t=' + total + '&s=' + score;
-			}
+				window.location.href = 'http://localhost:8888/student/testover?t=' + total + '&s=' + score;
+				return;
+			 }
 			displayCurrentRecord();
 			clearInterval(timer); // Clear existing timer
 			seconds = 30; // Reset seconds
@@ -84,23 +85,19 @@ $(document).ready(function() {
 	}
 
 	$('#ButtonNext').on('click', function() {
-		// Move to next record
-
 		checkAnswer();
 		currentIndex++;
-		
 		if (currentIndex == jsonData.length) {
 			total = jsonData.length;
-			window.location.href = '/student/testover?t=' + total + '&s=' + score;
+			window.location.href = 'http://localhost:8888/student/testover?t=' + total + '&s=' + score;
+			return;
 		}
-		
-        qno++;
-
+		qno++;
 		displayCurrentRecord();
-		clearInterval(timer); // Clear existing timer
-		seconds = 30; // Reset seconds
-		timerDisplay.textContent = seconds; // Update timer display
-		startTimer(); // Start timer again
-	});
+		clearInterval(timer);
+		seconds = 30;
+		timerDisplay.textContent = seconds;
+		startTimer();
+	}); // Start timer again
 	startTimer();
 });
